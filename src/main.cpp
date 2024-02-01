@@ -1,22 +1,5 @@
 #include <Arduino.h>
 
-/*......................
- *  BTS7960 HBridge Test
- *
- *  Simple example of using the BTS7960 HBridge to control a motor
- *  This sketch simply sends a pwm signal to the HBridge to spin the motor
- *  one way and then spin the motor the other direction.
- *
- *  PWM Description for Arduino: https://www.arduino.cc/en/tutorial/PWM
- *
- *  By : Barry Tarlton
- */
-// Set the pin out for the Right PWM and Left PWM
-// "Right" and "Left" are relative to the motor direction and
-// doesn't make sense from a programming point of view sense
-// depending on how you wire or physcally mount the motor the direction is different.
-// But when you send a signal on RPWM the motor will go one way and when you
-// send a signal on LPWM, the motor will go the other way.
 int RPWM = 5; // Digital/PWM pin 5 to the RPWM on the BTS7960
 int LPWM = 6; // Digital/PWM pin 6 to the LPWM on the BTS7960
 
@@ -57,7 +40,7 @@ void loop()
 
   // Spin the motor one way 
   digitalWrite(LED, HIGH);
-  
+
   analogWrite(RPWM, 255);
   analogWrite(LPWM, 0);
 }
