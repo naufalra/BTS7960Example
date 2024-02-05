@@ -1,4 +1,8 @@
 #include <Arduino.h>
+#include <Servo.h>
+
+Servo myServo;
+
 
 int RPWM = 5; // Digital/PWM pin 5 to the RPWM on the BTS7960
 int LPWM = 6; // Digital/PWM pin 6 to the LPWM on the BTS7960
@@ -15,6 +19,8 @@ void setup()
   pinMode(L_EN, OUTPUT);
   pinMode(R_EN, OUTPUT);
   pinMode(LED, OUTPUT);
+  myServo.attach(A1);  // attaches the servo on pin 9 to the Servo object
+  myServo.write(90); // set initial position to 90 degrees (Should be a straight line)
 
   digitalWrite(RPWM, LOW);
   digitalWrite(LPWM, LOW);
@@ -31,16 +37,22 @@ void setup()
     digitalWrite(LED, LOW);
     delay(500);
   }
+
+  
 }
 
 void loop()
 {
   digitalWrite(R_EN, HIGH);
   digitalWrite(L_EN, HIGH);
-
-  // Spin the motor one way 
-  digitalWrite(LED, HIGH);
-
-  analogWrite(RPWM, 255);
+  
+  Serial.println("Forward");
+  analogWrite(LED, 0);
+  analogWrite(RPWM, 100);
   analogWrite(LPWM, 0);
+  delay(2000);
+
+  analogWrite(RPWM, 0);
+  analogWrite(LPWM, 0);
+  delay(2000);
 }
